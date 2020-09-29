@@ -214,7 +214,7 @@
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="javascript:;"> Profile</a>
 
-                                    <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Se deconnecter</a>
+                                    <a class="dropdown-item" href="index.php?action=logout"><i class="fa fa-sign-out pull-right"></i> Se deconnecter</a>
                                 </div>
                             </li>
 

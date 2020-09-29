@@ -65,6 +65,8 @@ if (isset($_SESSION['user-sat'])) {
             include('view/listProductView.php');
         } elseif ($action == 'listActivity') {
             include('view/listActivityView.php');
+        } elseif ($action == 'logout') {
+            include('view/logout.php');
         } else {
             include('view/homeView.php');
         }
@@ -84,6 +86,18 @@ if (isset($_SESSION['user-sat'])) {
     }
     require('view/loginView.php');
 } elseif (isset($_GET['login'])) {
+    if (!empty($_POST)) {
+
+        $res = UserManager::connectUser($_POST);
+        if ($res != 1) {
+            $_SESSION['messages']['msg'] = $res;
+            $_SESSION['messages']['code'] = 0;
+        } else {
+            header('Location: index.php?action=profile');
+        }
+    }
+    require('view/loginView.php');
+} else {
     if (!empty($_POST)) {
 
         $res = UserManager::connectUser($_POST);
