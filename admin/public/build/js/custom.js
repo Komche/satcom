@@ -1801,7 +1801,7 @@ function init_validator() {
     console.log('init_validator');
 
     // initialize the validator function
-    // validator.message.date = 'not a real date';
+    validator.message.date = 'not a real date';
 
     // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
     $('form')
@@ -5024,7 +5024,6 @@ $(document).ready(function () {
     init_morris_charts();
     init_skycons();
     init_select2();
-    init_validator();
     init_DataTables();
     init_chart_doughnut();
     init_gauge();
@@ -5035,5 +5034,6 @@ $(document).ready(function () {
     init_CustomNotification();
     init_autosize();
     init_autocomplete();
+    init_validator();
 
 });	
