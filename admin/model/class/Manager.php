@@ -233,11 +233,12 @@ class Manager
     public static function messages($msg, $code)
     {
         $type_alerte = 'alert-danger';
-        if ($code == 1) $type_alerte = 'alert-success';
+	$icon_alert = 'fa-ban';
+        if ($code == 1) {$type_alerte = 'alert-success'; $icon_alert='fa-check';};
 
         echo  '<div class="alert ' . $type_alerte . ' alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h4><i class="icon fa fa-ban"></i> AEMN!</h4>
+        <h4><i class="icon fa '.$icon_alert.'"></i> SATCOM!</h4>
         ' . $msg . '
       </div>';
     }
