@@ -1,5 +1,12 @@
 <?php
-$title = "Ajouter un utilisateur";
+!empty($_GET['modif']) ? $title = "Ajouter un utilisateur" : "Modifier un utilisateur";
+
+$user = null;
+if (!empty($_GET['modif'])) {
+    extract($_GET);
+    $user = Manager::getData('utilisateur', 'id_utilisateur', $modif)['data'];
+
+}
 
 ob_start();
 ?>
@@ -41,7 +48,7 @@ ob_start();
                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="nom">Nom <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 ">
-                        <input type="text" id="nom" name="nom" required="required" class="form-control parsley-success" data-parsley-id="5">
+                        <input value="<?= (!empty($_GET['modif']) && is_array($user)) ? $user['nom'] : '' ?>" type="text" id="nom" name="nom" required="required" class="form-control parsley-success" data-parsley-id="5">
                         
                     </div>
                 </div>
@@ -49,20 +56,20 @@ ob_start();
                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="prenom">Prénom <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 ">
-                        <input type="text" id="prenom" name="prenom" required="required" class="form-control parsley-error" data-parsley-id="7">
+                        <input type="text" value="<?= (!empty($_GET['modif']) && is_array($user)) ? $user['prenom'] : '' ?>" id="prenom" name="prenom" required="required" class="form-control parsley-error" data-parsley-id="7">
                         
                     </div>
                 </div>
                 <div class="item form-group">
                     <label for="numero_telephone" class="col-form-label col-md-3 col-sm-3 label-align">N° de téléphone</label>
                     <div class="col-md-6 col-sm-6 ">
-                        <input id="numero_telephone" class="form-control" type="text" name="numero_telephone" data-parsley-id="9">
+                        <input id="numero_telephone" class="form-control" type="text" value="<?= (!empty($_GET['modif']) && is_array($user)) ? $user['numero_telephone'] : '' ?>" name="numero_telephone" data-parsley-id="9">
                     </div>
                 </div>
                 <div class="item form-group">
                     <label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Email</label>
                     <div class="col-md-6 col-sm-6 ">
-                        <input id="email" class="form-control" type="text" name="email" data-parsley-id="9">
+                        <input value="<?= (!empty($_GET['modif']) && is_array($user)) ? $user['email'] : '' ?>" id="email" class="form-control" type="text" name="email" data-parsley-id="9">
                     </div>
                 </div>
 

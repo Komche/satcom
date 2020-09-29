@@ -22,6 +22,16 @@ if (isset($_SESSION['user-sat'])) {
                     $_SESSION['messages']['msg'] = $res['message'];
                     $_SESSION['messages']['code'] = $res['code'];
                 }
+            }else {
+                if (!empty($_POST)) {
+                    $data = $_POST;
+                    $manager = new Manager();
+                    $res = $manager->updateData($data, 'utilisateur', 'id_utilisateur', $modif);
+                    // Manager::showError($res);
+
+                    $_SESSION['messages']['msg'] = $res['message'];
+                    $_SESSION['messages']['code'] = $res['code'];
+                }
             }
 
             include('view/addUserView.php');

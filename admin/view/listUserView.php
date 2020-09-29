@@ -54,7 +54,7 @@ ob_start();
                                             <td class=" "><?= $value['email'] ?></td>
                                             <td class=" "><?= $value['status'] == 1 ? 'Activer' : 'non activer' ?></td>
 
-                                            <td class=" last"><a class="btn btn-primary" href="#"><i class="fa fa-edit"></i></a>
+                                            <td class=" last"><a class="btn btn-primary" href="index.php?action=addUser&modif=<?= $value['id_utilisateur'] ?>"><i class="fa fa-edit"></i></a>
                                             </td>
                                         </tr>
                                     <?php else : ?>
@@ -65,7 +65,7 @@ ob_start();
                                             <td class=" "><?= $value['email'] ?></td>
                                             <td class=" "><?= $value['status'] == 1 ? 'Activer' : 'non activer' ?></td>
 
-                                            <td class=" last"><a class="btn btn-primary" href="#"><i class="fa fa-edit"></i></a>
+                                            <td class=" last"><a class="btn btn-primary" href="index.php?action=addUser&modif=<?= $value['id_utilisateur'] ?>"><i class="fa fa-edit"></i></a>
                                             </td>
                                         </tr>
                             <?php endif;
