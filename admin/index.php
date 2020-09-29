@@ -48,6 +48,20 @@ if (isset($_SESSION['user-sat'])) {
                     $_SESSION['messages']['msg'] = $res['message'];
                     $_SESSION['messages']['code'] = $res['code'];
                 }
+            }else {
+                if (!empty($_POST)) {
+                    $data = $_POST;
+                    if (!empty($_FILES['src_img'])) {
+                        $data['src_img'] = Manager::uploadProfilePicture($_FILES['src_img'])['data'];
+                    }else {
+                        unset($data['src_img']);
+                    }
+                    $manager = new Manager();
+                    $res = $manager->updateData($data, 'produit', 'id_produit', $modif);
+
+                    $_SESSION['messages']['msg'] = $res['message'];
+                    $_SESSION['messages']['code'] = $res['code'];
+                }
             }
 
             include('view/addProductView.php');

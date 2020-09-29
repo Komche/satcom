@@ -1,5 +1,5 @@
 <?php
-!empty($_GET['modif']) ? $title = "Ajouter un utilisateur" : "Modifier un utilisateur";
+empty($_GET['modif']) ? $title = "Ajouter un utilisateur" : $title = "Modifier un utilisateur";
 
 $user = null;
 if (!empty($_GET['modif'])) {

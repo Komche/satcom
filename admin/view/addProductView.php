@@ -1,6 +1,12 @@
 <?php
-$title = "Ajouter un produit";
+empty($_GET['modif']) ? $title = "Ajouter un produit" : $title = "Modifier un produit";
 
+$product = null;
+if (!empty($_GET['modif'])) {
+    extract($_GET);
+    $product = Manager::getData('produit', 'id_produit', $modif)['data'];
+
+}
 ob_start();
 ?>
 <div class="page-title">
@@ -40,20 +46,20 @@ ob_start();
           <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Nom du produit<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-              <input class="form-control" name="libelle_produit" placeholder="ex. Ordinateur HP" required="required">
+              <input value="<?= (!empty($_GET['modif']) && is_array($product)) ? $product['libelle_produit'] : '' ?>" class="form-control" name="libelle_produit" placeholder="ex. Ordinateur HP" required="required">
             </div>
           </div>
           <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Pix du produit<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-              <input class="form-control" type="number" name="prix" placeholder="ex. 1200" required="required">
+              <input value="<?= (!empty($_GET['modif']) && is_array($product)) ? $product['prix'] : '' ?>" class="form-control" type="number" name="prix" placeholder="ex. 1200" required="required">
             </div>
           </div>
           <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Quantité du produit<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-              <input class="form-control" type="number" name="quantite" placeholder="ex. 5" required="required">
-              <input hidden class="form-control" value="<?= $_SESSION['user-sat']['id_utilisateur'] ?>" type="number" name="utilisateur" required="required">
+              <input value="<?= (!empty($_GET['modif']) && is_array($product)) ? $product['quantite'] : '' ?>" class="form-control" type="number" name="quantite" placeholder="ex. 5" required="required">
+              <input hidden class="form-control" value="<?= (!empty($_GET['modif']) && is_array($product)) ? $product['utilisateur'] : $_SESSION['user-sat']['id_utilisateur'] ?>" type="number" name="utilisateur" required="required">
             </div>
           </div>
           <div class="field item form-group">
@@ -65,7 +71,7 @@ ob_start();
                 if (is_array($data) || is_object($data)) :
                   foreach ($data as $key => $value) :
                 ?>
-                    <option value="<?= $value['id_type_produit'] ?>"><?= $value['libelle_type_produit'] ?></option>
+                    <option <?= (!empty($_GET['modif']) && is_array($product)) ?( ($product['type_produit']==$value['id_type_produit']) ? 'selected' : '') : '' ?>  value="<?= $value['id_type_produit'] ?>"><?= $value['libelle_type_produit'] ?></option>
                 <?php
                   endforeach;
                 endif;
@@ -76,10 +82,10 @@ ob_start();
           <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Detail<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-              <textarea class="form-control" required="required" name="detail"></textarea></div>
+              <textarea class="form-control" required="required" name="detail"><?= (!empty($_GET['modif']) && is_array($product)) ? $product['libelle_produit'] : '' ?></textarea></div>
           </div>
           <div class="form-group" style="text-align: center;">
-            <img src="<?= (!empty($_GET['modif'])) ? $src : 'public/img/150x150.png' ?>" id="profile_img" style="height: 100px; border-radius: 50%" alt="">
+            <img src="<?= (!empty($_GET['modif'])) ? $product['src_img'] : 'public/img/150x150.png' ?>" id="profile_img" style="height: 100px; border-radius: 50%" alt="">
             <!-- hidden file input to trigger with JQuery  -->
             <input type="file" name="src_img" id="profile_input" value="" style="display: none;">
           </div>

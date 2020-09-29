@@ -53,7 +53,7 @@ ob_start();
                         <td><?= $value['libelle_type_produit'] ?></td>
                         <td><?= $value['etat'] ?></td>
                         <td><img src="<?= $value['src_img'] ?>" alt="produit" width="100" srcset=""></td>
-                        <td><a class="btn btn-primary" href="#"><i class="fa fa-edit"></i></a></td>
+                        <td><a class="btn btn-primary" href="index.php?action=addProduct&modif=<?= $value['id_produit'] ?>"><i class="fa fa-edit"></i></a></td>
                       </tr>
                   <?php endforeach;
                   endif; ?>
