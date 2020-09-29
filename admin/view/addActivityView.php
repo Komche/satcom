@@ -40,6 +40,7 @@ ob_start();
           <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Nom de l'activité<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
+            <input hidden class="form-control" value="<?= $_SESSION['user-sat']['id_utilisateur'] ?>" type="number" name="utilisateur" required="required">
               <input class="form-control" name="libelle_activite" placeholder="ex. Reception des matériels" required="required">
             </div>
           </div>
