@@ -99,7 +99,6 @@ if (isset($_SESSION['user-sat'])) {
     require('view/loginView.php');
 } else {
     if (!empty($_POST)) {
-
         $res = UserManager::connectUser($_POST);
         if ($res != 1) {
             $_SESSION['messages']['msg'] = $res;
