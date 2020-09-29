@@ -60,12 +60,11 @@ if (isset($_SESSION['user-sat'])) {
 
             include('view/addActivityView.php');
         } elseif ($action == 'listUser') {
-            
-
             include('view/listUserView.php');
         } elseif ($action == 'listProduct') {
-            
             include('view/listProductView.php');
+        } elseif ($action == 'listActivity') {
+            include('view/listActivityView.php');
         } else {
             include('view/homeView.php');
         }
