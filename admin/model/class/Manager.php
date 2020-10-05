@@ -120,7 +120,7 @@ class Manager
                 }
             } else {
                 $query .= "WHERE $property=:$property";
-
+                
                 $req = self::bdd()->prepare($query);
                 $req->execute([$property => $val]);
                 if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {

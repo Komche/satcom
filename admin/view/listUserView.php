@@ -44,6 +44,11 @@ ob_start();
                             $data = Manager::getData('utilisateur')['data'];
                             if (is_array($data) || is_object($data)) :
                                 foreach ($data as $key => $value) :
+                                    if (empty($value['src_img'])) {
+                                        $src = createAvatarImage($value['nom']);
+                                        $slq = "UPDATE utilisateur SET src_img=? WHERE id_utilisateur=?";
+                                        Manager::modifRecord($slq, [$src, $value['id_utilisateur']]);
+                                    }
                                     $i++;
                                     if ($i % 2 == 0) :
                             ?>

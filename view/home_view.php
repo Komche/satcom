@@ -155,7 +155,7 @@ ob_start();
                                             </a>
                                             <div class="item-caption">
 
-                                                <a class="pull-right btn btn-primary btn-outlined" href="index.php?action=produit1">Lire Plus</a>
+                                                <a class="pull-right btn btn-primary btn-outlined" href="index.php?action=detail&detail=<?= $value['id_produit'] ?>">Lire Plus</a>
                                                 <h4 class="pull-left"><?= $value['libelle_produit'] ?></h4>
                                             </div>
                                         </li>

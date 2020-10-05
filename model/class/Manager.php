@@ -120,12 +120,14 @@ class Manager
                 }
             } else {
                 $query .= "WHERE $property=:$property";
-
+                
                 $req = self::bdd()->prepare($query);
                 $req->execute([$property => $val]);
                 if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
                     self::$results['code'] = 1;
+                    // Manager::showError(self::$results);
                     return self::$results;
+
                 } else {
                     return self::throwError(0, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
                 }
@@ -233,13 +235,14 @@ class Manager
     public static function messages($msg, $code)
     {
         $type_alerte = 'alert-danger';
-        if ($code == 1) $type_alerte = 'alert-success';
-
-        echo  '<div class="alert ' . $type_alerte . ' alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h4><i class="icon fa fa-ban"></i> AEMN!</h4>
-        ' . $msg . '
-      </div>';
+        $icon_alert = 'fa-ban';
+            if ($code == 1) {$type_alerte = 'alert-success'; $icon_alert='fa-check';};
+    
+            echo  '<div class="alert ' . $type_alerte . ' alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa '.$icon_alert.'"></i> SATCOM!</h4>
+            ' . $msg . '
+          </div>';
     }
 
     public static function showError($var)
@@ -564,4 +567,24 @@ class Manager
             }
         }
     }
+
+    //https://phppot.com/php/how-to-generate-initial-avatar-image-from-username-using-php-dynamically/
+public static function createAvatarImage($string)
+{
+ 
+    $imageFilePath = "img/".str_replace(' ','_',$string) . ".png";
+
+    //base avatar image that we use to center our text string on top of it.
+    $avatar = imagecreatetruecolor(60,60);
+    $bg_color = imagecolorallocate($avatar, 211, 211, 211);
+    imagefill($avatar,0,0,$bg_color);
+    $avatar_text_color = imagecolorallocate($avatar, 0, 0, 0);
+	// Load the gd font and write 
+    $font = imageloadfont('lib/gd-font.gdf');
+    imagestring($avatar, $font, 10, 10, $string, $avatar_text_color);
+    imagepng($avatar, $imageFilePath);
+    imagedestroy($avatar);
+ 
+    return $imageFilePath;
+}
 }

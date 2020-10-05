@@ -21,8 +21,9 @@ if (isset($_SESSION['user-sat'])) {
 
                     $_SESSION['messages']['msg'] = $res['message'];
                     $_SESSION['messages']['code'] = $res['code'];
+                    header('Location:index.php?action=listUser');
                 }
-            }else {
+            } else {
                 if (!empty($_POST)) {
                     $data = $_POST;
                     $manager = new Manager();
@@ -35,6 +36,17 @@ if (isset($_SESSION['user-sat'])) {
             }
 
             include('view/addUserView.php');
+        } elseif ($action == 'product') {
+            if (!empty($_POST)) {
+                $data = $_POST;
+              
+                    $manager = new Manager();
+                    $res = $manager->insert($data, 'commentaire');
+                    $_SESSION['messages']['msg'] = $res['message'];
+                    $_SESSION['messages']['code'] = $res['code'];
+               
+            }
+            include_once('view/commentProductView.php');
         } elseif ($action == 'addProduct') {
             if (empty($modif)) {
                 if (!empty($_POST)) {
@@ -48,12 +60,12 @@ if (isset($_SESSION['user-sat'])) {
                     $_SESSION['messages']['msg'] = $res['message'];
                     $_SESSION['messages']['code'] = $res['code'];
                 }
-            }else {
+            } else {
                 if (!empty($_POST)) {
                     $data = $_POST;
                     if (!empty($_FILES['src_img'])) {
                         $data['src_img'] = Manager::uploadProfilePicture($_FILES['src_img'])['data'];
-                    }else {
+                    } else {
                         unset($data['src_img']);
                     }
                     $manager = new Manager();
@@ -94,10 +106,10 @@ if (isset($_SESSION['user-sat'])) {
         } else {
             include('view/homeView.php');
         }
-    }else {
+    } else {
         include('view/homeView.php');
     }
-}elseif (isset($_GET['changePass'])) {
+} elseif (isset($_GET['changePass'])) {
     if (!empty($_POST)) {
         $res = UserManager::activeUser($_POST);
         //print_r($_POST); die;
