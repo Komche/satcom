@@ -40,6 +40,7 @@ ob_start();
                                     </div>
                                 </a>
                                 <div class="item-caption">
+                                <a class="pull-right btn btn-primary btn-outlined" href="index.php?action=detail&detail=<?= $value['id_produit'] ?>">Lire Plus</a>
                                     <h4><?= $value['libelle_produit'] ?></h4>
 
                                 </div>
