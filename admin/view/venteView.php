@@ -2,9 +2,8 @@
 $title = "Vente";
 $product = null;
 if (!empty($_GET['produit'])) {
-    extract($_GET);
-    $product = Manager::getData('produit', 'id_produit', $produit)['data'];
-
+  extract($_GET);
+  $product = Manager::getData('produit', 'id_produit', $produit)['data'];
 }
 ob_start();
 ?>
@@ -20,7 +19,7 @@ ob_start();
   <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
       <div class="x_title">
-        <h2>Vente du <?= $product['libelle_produit']?> </small></h2>
+        <h2>Vente du <?= $product['libelle_produit'] ?> </small></h2>
         <!-- <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -45,7 +44,7 @@ ob_start();
           <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Quantité à vendre<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-              <input onkeyup="getTotal()" onchange="getTotal()" value="<?= (!empty($_GET['modif']) && is_array($vente)) ? $vente['quantite'] : 1 ?>" min="1" max="<?=$product['quantite']?>" class="form-control" type="number" name="quantite" id="quantite" placeholder="ex. 5" required="required">
+              <input onkeyup="getTotal()" onchange="getTotal()" value="<?= (!empty($_GET['modif']) && is_array($vente)) ? $vente['quantite'] : 1 ?>" min="1" max="<?= $product['quantite'] ?>" class="form-control" type="number" name="quantite" id="quantite" placeholder="ex. 5" required="required">
               <input hidden class="form-control" value="<?= (!empty($_GET['modif']) && is_array($vente)) ? $vente['produit'] : $_GET['produit'] ?>" type="number" name="produit" required="required">
               <input hidden class="form-control" value="<?= (!empty($_GET['modif']) && is_array($vente)) ? $vente['produit'] : $product['quantite'] ?>" type="number" name="max" required="required">
             </div>
@@ -80,6 +79,50 @@ ob_start();
 
         </form>
       </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="card-box table-responsive">
+
+      <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th>Nom du produit</th>
+            <th>Montant</th>
+            <th>Quantité</th>
+            <th>Montant du vente</th>
+            <th>État</th>
+            
+          </tr>
+        </thead>
+
+
+        <tbody>
+          <?php
+           $sql = "UPDATE produit SET etat=? WHERE quantite<=?";
+           Manager::modifRecord($sql, [0, 3]);
+           $sql = "UPDATE produit SET etat=? WHERE quantite=?";
+           Manager::modifRecord($sql, [-1, 0]);
+          $sql = "SELECT id_vente, montant, v.quantite, montant_total, libelle_produit, etat  FROM produit p, vente v WHERE v.produit=p.id_produit";
+
+          $data = Manager::getMultiplesRecords($sql);
+          if (is_array($data) || is_object($data)) :
+            foreach ($data as $key => $value) :
+          ?>
+              <tr>
+                <td><?= $value['libelle_produit'] ?></td>
+                <td><?= $value['montant'] ?></td>
+                <td><?= $value['quantite'] ?></td>
+                <td><?= $value['montant_total'] ?></td>
+                <td class="<?= getEtatClass($value['etat']) ?>"><?= getEtat($value['etat']) ?></td>
+                <!-- <td><a class="btn btn-primary" href="index.php?action=addProduct&modif=<?= $value['id_vente'] ?>"><i class="fa fa-edit"></i></a>
+                  </td> -->
+              </tr>
+          <?php endforeach;
+          endif; ?>
+
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

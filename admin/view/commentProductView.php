@@ -32,7 +32,7 @@ ob_start();
             </div>
           </div>
           <h3><?= $data['libelle_produit'] ?></h3>
-          <a href="index.php?action=vendre&produit=<?= $data['id_produit'] ?>" class="btn btn-primary">Vendre</a>
+          <a href="index.php?action=vendre&produit=<?= $data['id_produit'] ?>" class="btn btn-primary <?= $data['etat']=='-1' ? 'disabled' : ''?>">Vendre</a>
         </div>
         <div class="col-md-9 col-sm-9 ">
 

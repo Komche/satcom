@@ -42,6 +42,8 @@ ob_start();
                   <?php
                   $sql = "UPDATE produit SET etat=? WHERE quantite<=?";
                   Manager::modifRecord($sql, [0, 3]);
+                  $sql = "UPDATE produit SET etat=? WHERE quantite=?";
+                  Manager::modifRecord($sql, [-1, 0]);
                   $sql = "SELECT * FROM produit p, type_produit t WHERE t.id_type_produit=p.type_produit";
 
                   $data = Manager::getMultiplesRecords($sql);
