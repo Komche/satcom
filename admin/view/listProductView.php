@@ -40,6 +40,8 @@ ob_start();
 
                 <tbody>
                   <?php
+                  $sql = "UPDATE produit SET etat=? WHERE quantite<=?";
+                  Manager::modifRecord($sql, [0, 3]);
                   $sql = "SELECT * FROM produit p, type_produit t WHERE t.id_type_produit=p.type_produit";
 
                   $data = Manager::getMultiplesRecords($sql);
@@ -51,7 +53,7 @@ ob_start();
                         <td><?= $value['prix'] ?></td>
                         <td><?= $value['quantite'] ?></td>
                         <td><?= $value['libelle_type_produit'] ?></td>
-                        <td><?= $value['etat'] ?></td>
+                        <td class="<?= getEtatClass($value['etat']) ?>"><?= getEtat($value['etat']) ?></td>
                         <td><img src="<?= $value['src_img'] ?>" alt="produit" width="100" srcset=""></td>
                         <td><a class="btn btn-primary" href="index.php?action=addProduct&modif=<?= $value['id_produit'] ?>"><i class="fa fa-edit"></i></a>
                           <a class="btn btn-warning" href="index.php?action=product&comment=<?= $value['id_produit'] ?>"><i class="fa fa-comment"></i></a></td>

@@ -100,15 +100,15 @@ if (isset($_SESSION['user-sat'])) {
             include('view/listUserView.php');
         } elseif ($action == 'listProduct') {
             include('view/listProductView.php');
-        } elseif ($action == 'listActivity') {
-            include('view/listActivityView.php');
+        } elseif ($action == 'dashboard') {
+            include('view/dashboardView.php');
         } elseif ($action == 'logout') {
             include('view/logout.php');
         } else {
-            include('view/homeView.php');
+            include('view/dashboardView.php');
         }
     } else {
-        include('view/homeView.php');
+        include('view/dashboardView.php');
     }
 } elseif (isset($_GET['changePass'])) {
     if (!empty($_POST)) {

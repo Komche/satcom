@@ -132,6 +132,27 @@ function getMatricule()
 
 }
 
+function getEtat($etat)
+{
+    if ($etat=="1") {
+        return 'disponible';
+    }elseif ($etat=="0") {
+        return 'stock faible';
+    }elseif ($etat=="-1") {
+        return 'non disponible';
+    }
+}
+function getEtatClass($etat)
+{
+    if ($etat=="1") {
+        return 'text-success';
+    }elseif ($etat=="0") {
+        return 'text-warning';
+    }elseif ($etat=="-1") {
+        return 'text-danger';
+    }
+}
+
 
 //https://phppot.com/php/how-to-generate-initial-avatar-image-from-username-using-php-dynamically/
 function createAvatarImage($string)
