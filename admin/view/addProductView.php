@@ -85,7 +85,7 @@ ob_start();
               <textarea class="form-control" required="required" name="detail"><?= (!empty($_GET['modif']) && is_array($product)) ? $product['libelle_produit'] : '' ?></textarea></div>
           </div>
           <div class="form-group" style="text-align: center;">
-            <img src="<?= (!empty($_GET['modif'])) ? $product['src_img'] : 'public/img/150x150.png' ?>" id="profile_img" style="height: 100px; border-radius: 50%" alt="">
+            <img src="<?= (!empty($_GET['modif'])) ? $product['src_img'] : 'public/img/150x150.png' ?>" id="profile_img" style="height: 100px; border-radius: 50%" alt="photo">
             <!-- hidden file input to trigger with JQuery  -->
             <input type="file" name="src_img" id="profile_input" value="" style="display: none;">
           </div>

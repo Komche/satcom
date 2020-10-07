@@ -42,7 +42,7 @@ ob_start();
             <div class="col-md-6">
               <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                <span><?= $data['date_pub'] ?></span> <b class="caret"></b>
+                <span><?= strftime('%a %e %b %G', strtotime($value['date_pub'])); ?></span> <b class="caret"></b>
               </div>
               <p><?= $data['detail'] ?></p>
             </div>
@@ -89,8 +89,8 @@ ob_start();
                       <li>
                         <img src="<?= empty($value['clt']) ? $value['uimg']: $value['cimg']  ?>" class="avatar" alt="Avatar">
                         <div class="message_date">
-                          <h3 class="date text-info"><?= $date->format('d'); ?></h3>
-                          <p class="month"><?= $monthName ?></p>
+                          <h3 class="date text-info"><?= strftime('%a %e', strtotime($value['date_commentaire'])); ?></h3>
+                          <p class="month"><?= strftime('%b %G', strtotime($value['date_commentaire'])); ?></p>
                         </div>
                         <div class="message_wrapper">
                           <h4 class="heading"><?= empty($value['clt']) ? $value['nom'] . ' ' . $value['prenom'] : $value['cln']  ?></h4>

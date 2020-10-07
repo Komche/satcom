@@ -63,7 +63,7 @@ if (isset($_SESSION['user-sat'])) {
             } else {
                 if (!empty($_POST)) {
                     $data = $_POST;
-                    if (!empty($_FILES['src_img'])) {
+                    if (!empty($_FILES['src_img']['name'])) {
                         $data['src_img'] = Manager::uploadProfilePicture($_FILES['src_img'])['data'];
                     } else {
                         unset($data['src_img']);
@@ -73,6 +73,7 @@ if (isset($_SESSION['user-sat'])) {
 
                     $_SESSION['messages']['msg'] = $res['message'];
                     $_SESSION['messages']['code'] = $res['code'];
+                    header('Location:index.php?action=listProduct');
                 }
             }
 
