@@ -39,12 +39,11 @@ if (isset($_SESSION['user-sat'])) {
         } elseif ($action == 'product') {
             if (!empty($_POST)) {
                 $data = $_POST;
-              
-                    $manager = new Manager();
-                    $res = $manager->insert($data, 'commentaire');
-                    $_SESSION['messages']['msg'] = $res['message'];
-                    $_SESSION['messages']['code'] = $res['code'];
-               
+
+                $manager = new Manager();
+                $res = $manager->insert($data, 'commentaire');
+                $_SESSION['messages']['msg'] = $res['message'];
+                $_SESSION['messages']['code'] = $res['code'];
             }
             include_once('view/commentProductView.php');
         } elseif ($action == 'addProduct') {
@@ -78,6 +77,43 @@ if (isset($_SESSION['user-sat'])) {
             }
 
             include('view/addProductView.php');
+        } elseif ($action == 'vendre') {
+            if (empty($modif)) {
+                if (!empty($_POST)) {
+                    $data = $_POST;
+                    if ($data['max'] < $data['quantite']) {
+                        $_SESSION['messages']['msg'] = "Quantite de vente supérieur au produit en stock";
+                        $_SESSION['messages']['code'] = 0;
+                    }else {
+                        unset($data['max']);
+                        $manager = new Manager();
+                        $res = $manager->insert($data, 'vente');
+                        if ($res['code']==1) {
+                            $sql = "UPDATE produit SET quantite= quantite-? WHERE id_produit=?";
+                            Manager::modifRecord($sql, [$data['quantite'], $data['produit']]);
+                        }
+                        $_SESSION['messages']['msg'] = $res['message'];
+                        $_SESSION['messages']['code'] = $res['code'];
+                    }
+                }
+            } else {
+                if (!empty($_POST)) {
+                    $data = $_POST;
+                    if (!empty($_FILES['src_img']['name'])) {
+                        $data['src_img'] = Manager::uploadProfilePicture($_FILES['src_img'])['data'];
+                    } else {
+                        unset($data['src_img']);
+                    }
+                    $manager = new Manager();
+                    $res = $manager->updateData($data, 'produit', 'id_produit', $modif);
+
+                    $_SESSION['messages']['msg'] = $res['message'];
+                    $_SESSION['messages']['code'] = $res['code'];
+                    header('Location:index.php?action=listProduct');
+                }
+            }
+
+            include('view/venteView.php');
         } elseif ($action == 'addActivity') {
             if (empty($modif)) {
                 if (!empty($_POST)) {

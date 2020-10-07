@@ -327,6 +327,11 @@
 
     <script>
 
+             function getTotal() { 
+                 console.log('ok');
+                 
+                 $('#montant_total').val($('#montant').val()*$('#quantite').val());
+              }
         $(document).ready(function () { 
             $('#editor-one').on('change', function () { 
                 // console.log($(this).html());
