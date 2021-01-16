@@ -36,6 +36,39 @@ if (isset($_SESSION['user-sat'])) {
             }
 
             include('view/addUserView.php');
+        } elseif ($action == 'addEquipe') {
+            if (empty($modif)) {
+                if (!empty($_POST)) {
+                    $data = $_POST;
+                    if (!empty($_FILES['src_img'])) {
+                        $data['src_img'] = Manager::uploadProfilePicture($_FILES['src_img'])['data'];
+                    }
+                    $manager = new Manager();
+                    $res = $manager->insert($data, 'equipe');
+                    // Manager::showError($res);
+
+                    $_SESSION['messages']['msg'] = $res['message'];
+                    $_SESSION['messages']['code'] = $res['code'];
+                    header('Location:index.php?action=listEquipe');
+                }
+            } else {
+                if (!empty($_POST)) {
+                    $data = $_POST;
+                    if (!empty($_FILES['src_img']['name'])) {
+                        $data['src_img'] = Manager::uploadProfilePicture($_FILES['src_img'])['data'];
+                    } else {
+                        unset($data['src_img']);
+                    }
+                    $manager = new Manager();
+                    $res = $manager->updateData($data, 'equipe', 'id_equipe', $modif);
+                    // Manager::showError($res);
+
+                    $_SESSION['messages']['msg'] = $res['message'];
+                    $_SESSION['messages']['code'] = $res['code'];
+                }
+            }
+
+            include('view/addEquipeView.php');
         } elseif ($action == 'product') {
             if (!empty($_POST)) {
                 $data = $_POST;
@@ -134,6 +167,8 @@ if (isset($_SESSION['user-sat'])) {
             include('view/addActivityView.php');
         } elseif ($action == 'listUser') {
             include('view/listUserView.php');
+        } elseif ($action == 'listEquipe') {
+            include('view/listEquipeView.php');
         } elseif ($action == 'listProduct') {
             include('view/listProductView.php');
         } elseif ($action == 'dashboard') {

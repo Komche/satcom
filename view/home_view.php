@@ -161,7 +161,7 @@ ob_start();
                                         </li>
                                 <?php endforeach;
                                 endif; ?>
-                                
+
                             </ul>
                         </div>
                         <div class="post-navigation" style="text-align: center;">
@@ -253,83 +253,41 @@ ob_start();
                     <h2 class="section-heading"><strong>Notre Equipe</strong> </h2>
                 </div>
             </div>
+
             <div class="row wow fadeInUp">
-                <div class="col-md-3">
-                    <div class="team-member">
-                        <div class="team-card">
-                            <img src="satimg/img5.jpg" class="img-responsive" alt="" style="height: 300px;">
-                            <ul class="list-inline social-buttons">
-                                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-                                </li>
-                                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
-                                </li>
-                                <li><a class="google" href="#"><i class="fa fa-google-plus"></i></a>
-                                </li>
-                                <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                                </li>
-                            </ul>
+                <?php
+                $sql = "SELECT * FROM equipe";
+
+                $data = Manager::getMultiplesRecords($sql);
+                if (is_array($data) || is_object($data)) :
+                    foreach ($data as $key => $value) :
+                ?>
+                        <div class="col-md-3">
+                            <div class="team-member">
+                                <div class="team-card">
+                                    <img src="admin/<?= $value['src_img'] ?>" class="img-responsive" alt="" style="height: 300px;">
+                                    <ul class="list-inline social-buttons">
+                                        <? if(!empty($value['twitter'])): ?>
+                                        <li><a class="twitter" href="<?= $value['twitter'] ?>"><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                        <? endif ?>
+                                        <? if(!empty($value['facebook'])): ?>
+                                            <li><a class="facebook" href="<?= $value['facebook'] ?>"><i class="fa fa-facebook"></i></a>
+                                        </li>
+                                        <? endif ?>
+                                        <? if(!empty($value['linkden'])): ?>
+                                            <li><a class="linkedin" href="<?= $value['linkden'] ?>"><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                        <? endif ?>
+                                    </ul>
+                                </div>
+                                <h4><?= $value['nom'].' '.$value['prenom'] ?></h4>
+                                <p class="text-muted">Directeur Général</p>
+                            </div>
                         </div>
-                        <h4>Ali Soumana</h4>
-                        <p class="text-muted">Directeur Général</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="team-member">
-                        <div class="team-card">
-                            <img src="assets/img/team/team2.jpg" class="img-responsive" alt="" style="height: 300px;">
-                            <ul class="list-inline social-buttons">
-                                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-                                </li>
-                                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
-                                </li>
-                                <li><a class="google" href="#"><i class="fa fa-google-plus"></i></a>
-                                </li>
-                                <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <h4>DDK</h4>
-                        <p class="text-muted">Camera man</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="team-member">
-                        <div class="team-card">
-                            <img src="assets/img/team/team3.jpg" class="img-responsive" alt="" style="height: 300px;">
-                            <ul class="list-inline social-buttons">
-                                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-                                </li>
-                                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
-                                </li>
-                                <li><a class="google" href="#"><i class="fa fa-google-plus"></i></a>
-                                </li>
-                                <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <h4>Barry</h4>
-                        <p class="text-muted">Marketeur</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="team-member">
-                        <div class="team-card">
-                            <img src="assets/img/team/team4.jpg" class="img-responsive" alt="" style="height: 300px;">
-                            <ul class="list-inline social-buttons">
-                                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-                                </li>
-                                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
-                                </li>
-                                <li><a class="google" href="#"><i class="fa fa-google-plus"></i></a>
-                                </li>
-                                <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <h4>Habsatou</h4>
-                        <p class="text-muted">Communicatrice</p>
-                    </div>
-                </div>
+                <?php endforeach;
+                endif; ?>
+                
             </div>
         </div>
     </div>

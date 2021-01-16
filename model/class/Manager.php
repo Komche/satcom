@@ -11,8 +11,8 @@ class Manager
 
     public static function bdd()
     {
-        $dbname = 'akoybizc_satcom';
-        $user = 'akoybizc_komche';
+        $dbname = 'c1485149c_satcom';
+        $user = 'c1485149c_satcom';
         $pass = '@damoukomche2019';
         $host = 'localhost';
         if ($_SERVER["SERVER_NAME"] == 'localhost') {

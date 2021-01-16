@@ -157,7 +157,7 @@
         </div>
 
         <div class="col-md-4 text-center" style="font-size: 15px;">
-          <span class="copyright wow fadeInUp">&copy; Copyright 2020 Developpé par <a href="#">AMADOU HAMA.</a></span>
+          <span class="copyright wow fadeInUp">&copy; Copyright 2020 Developpé par <a href="#">SATCOM.</a></span>
         </div>
 
       </div>

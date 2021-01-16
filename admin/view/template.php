@@ -74,6 +74,13 @@
                                         <!-- <li><a href="index3.html">Dashboard3</a></li> -->
                                     </ul>
                                 </li>
+                                <li><a><i class="fa fa-image"></i> Membre <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="index.php?action=addEquipe">Ajouter</a></li>
+                                        <li><a href="index.php?action=listEquipe">Consulter</a></li>
+                                        <!-- <li><a href="index3.html">Dashboard3</a></li> -->
+                                    </ul>
+                                </li>
                                 <li><a><i class="fa fa-shopping-bag"></i> Produit <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="index.php?action=addProduct">Ajouter</a></li>
