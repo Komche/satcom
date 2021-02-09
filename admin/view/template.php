@@ -67,20 +67,17 @@
                         <div class="menu_section">
                             <h3>General</h3>
                             <ul class="nav side-menu">
-                                <li><a><i class="fa fa-users"></i> Utilisateur <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-users"></i> Administration <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="index.php?action=addUser">Ajouter</a></li>
-                                        <li><a href="index.php?action=listUser">Consulter</a></li>
+                                        <li><a href="index.php?action=addUser">Ajouter un utilisateur</a></li>
+                                        <li><a href="index.php?action=listUser">Liste des utilisateurs</a></li>
+                                        <li><a href="index.php?action=addEquipe">Ajouter un membres</a></li>
+                                        <li><a href="index.php?action=listEquipe">Liste des membres</a></li>
+                                        <li><a href="index.php?action=addSliders">Ajouter des images defilantes</a></li>
                                         <!-- <li><a href="index3.html">Dashboard3</a></li> -->
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-image"></i> Membre <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="index.php?action=addEquipe">Ajouter</a></li>
-                                        <li><a href="index.php?action=listEquipe">Consulter</a></li>
-                                        <!-- <li><a href="index3.html">Dashboard3</a></li> -->
-                                    </ul>
-                                </li>
+                              
                                 <li><a><i class="fa fa-shopping-bag"></i> Produit <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="index.php?action=addProduct">Ajouter</a></li>

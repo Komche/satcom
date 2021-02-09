@@ -165,12 +165,38 @@ if (isset($_SESSION['user-sat'])) {
             }
 
             include('view/addActivityView.php');
+        }elseif ($action == 'addSliders') { //View Sliders
+            if (!empty($_GET['modif']) && ctype_digit($_GET['modif'])) { //Modification d'un Sliders
+                if (!empty($_POST)) {
+                    $data = $_POST;
+                    $res = Manager::updateData($data, 'post', 'id_post', $_GET['modif']);
+                    if ($res['code'] = 200) {
+                        header('Location: index.php?action=lstSliders');
+                    }
+                }
+            } else { // Ajout Sliders
+               
+                if ( !empty($_FILES)) {
+                    $data = $_POST;
+                    $data['img1'] = uploadFile($_FILES['img1']);
+                    $data['img2'] = uploadFile($_FILES['img2']);
+                    $data['img3'] = uploadFile($_FILES['img3']);
+                    
+                    $manager = new Manager();
+                    $res = $manager->insert($data, 'slider');
+                    $_SESSION['messages']['msg'] = $res['message'];
+                    $_SESSION['messages']['code'] = $res['code'];
+                }
+            }
+            require_once("view/addSlidersView.php");
         } elseif ($action == 'listUser') {
             include('view/listUserView.php');
         } elseif ($action == 'listEquipe') {
             include('view/listEquipeView.php');
         } elseif ($action == 'listProduct') {
             include('view/listProductView.php');
+        } elseif ($action == 'listActivity') {
+            include('view/listActivityView.php');
         } elseif ($action == 'dashboard') {
             include('view/dashboardView.php');
         } elseif ($action == 'logout') {

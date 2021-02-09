@@ -1,5 +1,8 @@
 <?php
 $title = " SATCOM";
+$sql = "SELECT * FROM slider ORDER BY id DESC LIMIT 1";
+$slider = Manager::getSingleRecords($sql);
+
 ob_start();
 ?>
 
@@ -12,28 +15,28 @@ ob_start();
             <div class="carousel-inner" role="listbox">
 
                 <div class="carousel-item active">
-                    <div class="carousel-background"><img src="satimg/s1.jpg" alt="" width="800"></div>
+                    <div class="carousel-background"><img src="<?= "admin/" . $slider['img1'] ?>" alt="" width="800"></div>
                     <div class="carousel-container">
                         <div class="carousel-content">
-                            <p style="color: #fff; padding-left:700px;">Installation et configiration des réseaux informatique.</p>
+                            <p style="color: #fff; padding-left:700px;"><?= $slider['text1'] ?></p>
                         </div>
                     </div>
                 </div>
 
                 <div class="carousel-item">
-                    <div class="carousel-background"><img src="satimg/img1.jpg" alt="" width="1400"></div>
+                    <div class="carousel-background"><img src="<?= "admin/" . $slider['img2'] ?>" alt="" width="1400"></div>
                     <div class="carousel-container">
                         <div class="carousel-content">
-                            <h2 style="padding-top: 440px; color: #fff;">La nouvelle technologie de l'information et de la communication</h2>
+                            <h2 style="padding-top: 440px; color: #fff;"><?= $slider['text2'] ?></h2>
                         </div>
                     </div>
                 </div>
 
                 <div class="carousel-item">
-                    <div class="carousel-background"><img src="satimg/sat.gif" alt="" width="1400"></div>
+                    <div class="carousel-background"><img src="<?= "admin/" . $slider['img3'] ?>" alt="" width="1400"></div>
                     <div class="carousel-container">
                         <div class="carousel-content">
-                            <p style="color: orange; padding-bottom: 200px;">Seminaire de formation en informatique! </p>
+                            <p style="color: orange; padding-bottom: 200px;"><?= $slider['text3'] ?></p>
                         </div>
                     </div>
                 </div>
@@ -138,7 +141,7 @@ ob_start();
                         <div class="col-md-12">
                             <ul class="direction-aware row">
                                 <?php
-                                $sql = "SELECT * FROM produit p, type_produit t WHERE t.id_type_produit=p.type_produit LIMIT 10";
+                                $sql = "SELECT * FROM produit p, type_produit t WHERE t.id_type_produit=p.type_produit AND etat<>'-1' LIMIT 10";
 
                                 $data = Manager::getMultiplesRecords($sql);
                                 if (is_array($data) || is_object($data)) :
@@ -160,7 +163,12 @@ ob_start();
                                             </div>
                                         </li>
                                 <?php endforeach;
-                                endif; ?>
+
+                                else :
+                                    echo ("Désolé aucun produit n'est disponible pour le moment !");
+                                endif; 
+                                
+                                ?>
 
                             </ul>
                         </div>
@@ -187,52 +195,33 @@ ob_start();
                 <div class="col-md-12">
                     <div id="post-content" class="gap row">
                         <div class="col-md-12">
-                            <ul class="direction-aware row">
-                                <li class="col-md-4 portfolio-item da-item wow fadeInUp" data-mh="blog-posts">
-                                    <a class="view-link" href="#" title="View Post">
-                                        <img src="satimg/unite.jpg" class="img-responsive" alt="" style="height: 150px; width: 150px;">
-                                        <div>
-                                            <div class="portfolio-hover-content">
-                                                <i class="pe-7s-close fa-3x"></i>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <div class="item-caption">
-                                        <h4 class="pull-left">Unité centrale</h4>
+                        <ul class="direction-aware row">
+                                <?php
+                                $sql = "SELECT * FROM activite p, type_activite t WHERE t.id_type_activite=p.type_activite AND type_activite=?";
 
-                                        <a class="pull-right btn btn-primary btn-outlined" href="#">Lire Plus</a>
-                                    </div>
-                                </li>
-                                <li class="col-md-4 portfolio-item da-item wow fadeInUp" data-mh="blog-posts">
-                                    <a class="view-link" href="#" title="View Post">
-                                        <img src="satimg/sat3.jpg" class="img-responsive" alt="" style="height: 150px; width: 150px;">
-                                        <div>
-                                            <div class="portfolio-hover-content">
-                                                <i class="pe-7s-close fa-3x"></i>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <div class="item-caption">
-                                        <h4 class="pull-left">Activités réaliser</h4>
+                                $data = Manager::getMultiplesRecords($sql, [1]);
+                                if (is_array($data) || is_object($data)) :
+                                    foreach ($data as $key => $value) :
+                                ?>
+                                        <li class="col-md-4 portfolio-item da-item wow fadeInUp" data-mh="blog-posts">
+                                            <a class="view-link" href="admin/<?= $value['src_img'] ?>" title="View Post">
+                                                <img src="admin/<?= $value['src_img'] ?>" class="img-responsive" alt="">
+                                                <div>
+                                                    <div class="portfolio-hover-content">
+                                                        <i class="pe-7s-close fa-3x"></i>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="item-caption">
+                                                <h4 class="pull-left"><?= $value['libelle_activite'] ?></h4>
 
-                                        <a class="pull-right btn btn-primary btn-outlined" href="#">Lire Plus</a>
-                                    </div>
-                                </li>
-                                <li class="col-md-4 portfolio-item da-item wow fadeInUp" data-mh="blog-posts">
-                                    <a class="view-link" href="#" title="View Post">
-                                        <img src="satimg/emig.jpg" class="img-responsive" alt="" style="height: 150px; width: 150px;">
-                                        <div>
-                                            <div class="portfolio-hover-content">
-                                                <i class="pe-7s-close fa-3x"></i>
+                                                <a class="pull-right btn btn-primary btn-outlined" href="#">Lire Plus</a>
                                             </div>
-                                        </div>
-                                    </a>
-                                    <div class="item-caption">
-                                        <h4 class="pull-left">Présentation des projets</h4>
-
-                                        <a class="pull-right btn btn-primary btn-outlined" href="#">Lire Plus</a>
-                                    </div>
-                                </li>
+                                        </li>
+                                <?php endforeach;
+                                endif;
+                                ?>
+                               
 
 
                             </ul>
@@ -272,22 +261,22 @@ ob_start();
                                         </li>
                                         <? endif ?>
                                         <? if(!empty($value['facebook'])): ?>
-                                            <li><a class="facebook" href="<?= $value['facebook'] ?>"><i class="fa fa-facebook"></i></a>
+                                        <li><a class="facebook" href="<?= $value['facebook'] ?>"><i class="fa fa-facebook"></i></a>
                                         </li>
                                         <? endif ?>
                                         <? if(!empty($value['linkden'])): ?>
-                                            <li><a class="linkedin" href="<?= $value['linkden'] ?>"><i class="fa fa-linkedin"></i></a>
+                                        <li><a class="linkedin" href="<?= $value['linkden'] ?>"><i class="fa fa-linkedin"></i></a>
                                         </li>
                                         <? endif ?>
                                     </ul>
                                 </div>
-                                <h4><?= $value['nom'].' '.$value['prenom'] ?></h4>
+                                <h4><?= $value['nom'] . ' ' . $value['prenom'] ?></h4>
                                 <p class="text-muted">Directeur Général</p>
                             </div>
                         </div>
                 <?php endforeach;
                 endif; ?>
-                
+
             </div>
         </div>
     </div>
@@ -302,38 +291,31 @@ ob_start();
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-10 col-xs-offset-1">
-                    <ul class="direction-aware owl-carousel wow fadeInUp" data-items="1" data-items-tablet="[768,1]" data-items-mobile="[479,1]">
+                    <div class="col-xs-10 col-xs-offset-1">
+                    <ul class="direction-aware owl-carousel wow fadeInUp" data-items="1" data-items-tablet="[768,1]"  data-items-mobile="[479,1]">
+                    <?php
+                                $sql = "SELECT * FROM activite p, type_activite t WHERE t.id_type_activite=p.type_activite AND type_activite=?";
+
+                                $data = Manager::getMultiplesRecords($sql, [2]);
+                                if (is_array($data) || is_object($data)) :
+                                    foreach ($data as $key => $value) :
+                                ?>
                         <li>
                             <div class="col-xs-5">
-                                <img src="satimg/img1.jpg" class="img-responsive" alt="">
+                                <img src="admin/<?= $value['src_img'] ?>" class="img-responsive" alt="">
                             </div>
                             <div class="col-xs-7 item-caption">
-                                <p style="color: #333;">Lancement de la formation sur la programmation mobile par SATCOM</p>
-                                <span><strong style="font-size: 16px; color: #1C563D;">Formation</strong></span>
+                                <p style="color: #333;"><?= $value['detail'] ?></p>
+                                <span><strong style="font-size: 16px; color: #1C563D;"><?= $value['libelle_activite'] ?></strong></span>
                             </div>
                         </li>
-                        <li>
-                            <div class="col-xs-5">
-                                <img src="satimg/s5.jpg" class="img-responsive" alt="">
-                            </div>
-                            <div class="col-xs-7 item-caption">
-                                <p style="color: #333;">Découverte des nouvelles technologie de l'information et de la communication par le groupe SATCOM</p>
-                                <span><strong style="font-size: 16px; color: #1C563D;">Internet</strong></span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="col-xs-5">
-                                <img src="satimg/img4.jpg" class="img-responsive" alt="">
-                            </div>
-                            <div class="col-xs-7 item-caption">
-                                <p style="color: #333;">rentré universitaire aujourd'hui effectuer à l'université Abdou moumouni de Niamey-Niger</p>
-                                <span><strong style="font-size: 16px; color: #1C563D;">Info en temps réel</strong></span>
-                            </div>
-                        </li>
+                        <?php endforeach;
+                                endif;
+                                ?>
+                        
                     </ul>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 </section>

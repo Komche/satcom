@@ -50,7 +50,7 @@
   <section id="topbar" class="d-none d-lg-block">
     <div class="container clearfix">
       <div class="contact-info float-left">
-        <i class="fa fa-envelope-o"></i><a href="mailto:contact@e-satcom.net"><b>satcom.com</b></a>
+        <i class="fa fa-envelope-o"></i><a href="mailto:contact@satcom-shop"><b>http://satcom-shop.com</b></a>
         <i class="fa fa-phone"></i><b>+227 92 10 14 39</b>
         <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
         <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>

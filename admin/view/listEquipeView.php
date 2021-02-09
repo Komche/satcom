@@ -15,7 +15,7 @@ ob_start();
     <div class="col-md-12 col-sm-12  ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Memebres </h2>
+                <h2>Membres </h2>
 
                 <div class="clearfix"></div>
             </div>
@@ -44,11 +44,11 @@ ob_start();
                             $data = Manager::getData('equipe')['data'];
                             if (is_array($data) || is_object($data)) :
                                 foreach ($data as $key => $value) :
-                                    if (empty($value['src_img'])) {
+                                    /* if (empty($value['src_img'])) {
                                         $src = createAvatarImage($value['nom']);
                                         $slq = "UPDATE equipe SET src_img=? WHERE id_equipe=?";
                                         Manager::modifRecord($slq, [$src, $value['id_equipe']]);
-                                    }
+                                    } */
                             ?>
                                         <tr class="pointer">
                                             <td class=" "><?= $value['nom'] ?></td>

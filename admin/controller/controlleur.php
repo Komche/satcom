@@ -173,3 +173,19 @@ function createAvatarImage($string)
  
     return $imageFilePath;
 }
+
+function uploadFile($file)
+{
+    if (!empty($file) && !empty($file['name'])) {
+
+        // Get image name
+        $src = date("Y.m.d.H.i.s") . $file['name'];
+        // define Where image will be stored
+        $target = "public/img/slider" . $src;
+        // upload image to folder
+        //Manager::showError($file);
+        if (move_uploaded_file($file['tmp_name'], $target)) {
+            return $target;
+        } else return 0;
+    }
+}
